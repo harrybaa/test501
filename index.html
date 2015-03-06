@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>basic-demo</title>
+<script src="./js/template.js"></script>
+<script src="./js/jquery.js"></script>
+</head>
+
+<body>
+<div id="content"></div>
+<script id="newsItem" type="text/html">
+	<li>
+		<a href="{{url}}">{{title}}</a>
+	</li>
+</script>
+
+<script>
+	$(document).ready(function(){
+		getNewsData();
+	});
+	function getNewsData(){
+		$.ajax({
+			url: "./data/news.json",
+			dataType: "json",
+			success: function(res){
+				console.log("News data pulled.");
+				renderNews(res);
+			},
+			error: function(){
+				console.log("Failed to pull News data.");
+			}
+		});
+	}
+	function renderNews(res){
+		var data = res,
+				html = '';
+		data.news.map(function(x){
+			html += template('newsItem', x);
+		})
+		$('#content').html(html);
+	}
+</script>
+</body>
+</html>
