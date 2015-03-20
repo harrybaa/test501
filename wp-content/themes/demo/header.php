@@ -23,29 +23,30 @@
   <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/home.css"
   type="text/css" media="screen" />
   <?php } else if( is_page('man') ) { ?>
-  <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css"
-  media="screen" />
+  <link rel="stylesheet" href="<?php ?>" type="text/css" media="screen"/>
   <?php } ?>
 </head>
 
 <body>
 <div id='main' class='site'>
 
-  <header id='masthead' class='site-header' role='header'>
-    <div class='logo'>
-      <span>百药通LOGO</span>
-    </div><!-- .site-branding -->
+  <header id='masthead' class='header' role='header'>
+    <div class='header-wrapper'>
+      <div class='logo left'>
+        <span>百药通LOGO</span>
+      </div><!-- .site-branding -->
 
-    <div class='login-block'>
-      <a href='#'>登录</a>
-      |
-      <a href='#'>注册</a>
-    </div>
+      <div class='login-block right'>
+        <a href='#'>登录</a>
+        |
+        <a href='#'>注册</a>
+      </div>
 
-    <div class='login-info hide'>
-      <a href="#" class='login-name'>E123456</a>
-      <a href="#" class='login-help'>帮助</a>
-      <a href="#" class='login-setting'>设置</a>
+      <div class='login-info hide right'>
+        <a href="#" class='login-name'>E123456</a>
+        <a href="#" class='login-help'>帮助</a>
+        <a href="#" class='login-setting'>设置</a>
+      </div>
     </div>
   </header><!-- .site-header -->
 

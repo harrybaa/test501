@@ -12,9 +12,9 @@
 
   </div><!-- .site-content -->
 
-  <footer id="colophon" class="site-footer" role="contentinfo">
+  <footer id="footer" class="footer" role="contentinfo">
     <div class="site-info">
-      <a href="<?php echo esc_url( __( 'https://wordpress.org/', 'twentyfifteen' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'twentyfifteen' ), 'WordPress' ); ?></a>
+      <a href="<?php echo esc_url( __( 'https://wordpress.org/', '' ) ); ?>"><?php printf( __( 'Proudly powered by %s', '' ), 'WordPress' ); ?></a>
     </div><!-- .site-info -->
   </footer><!-- .site-footer -->
 

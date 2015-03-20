@@ -1,0 +1,11 @@
+/**
+ * author: wliu
+ * description: for test 501
+ * date: 2015/3/17
+ */
+
+@mixin appearance_none{
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance:         none;
+}
