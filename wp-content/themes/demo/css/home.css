@@ -79,9 +79,10 @@
     .category .cate-i a {
       color: #333;
       text-decoration: none;
-      transition: color .25s; }
+      transition: all .25s; }
       .category .cate-i a:hover {
-        color: blue; }
+        color: blue;
+        text-decoration: underline; }
     .category .cate-i:hover {
       cursor: pointer; }
   .category .i1 {
@@ -122,5 +123,105 @@
     background-position: -682px 0; }
   .category .i19 {
     background-position: -723px 0; }
+
+/**
+ * 3.0 - Section Block
+ **/
+.section {
+  width: 980px;
+  margin: 10px auto;
+  .right-float: left;
+  .right-width: 230px; }
+  .section .left {
+    float: left;
+    width: 300px; }
+  .section .mid {
+    float: left;
+    width: 440px;
+    margin: 0 5px; }
+
+/**
+ * 3.1 - Gallery News
+ **/
+.gallery-news {
+  width: 300px;
+  height: 235px;
+  outline: 1px solid #ccc;
+  background: #fff; }
+
+/**
+ * 3.2 - News
+ **/
+.news-wrap {
+  width: 440px;
+  height: 540px;
+  outline: 1px solid #ccc;
+  background: #fff; }
+  .news-wrap .news-wrap-header {
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff; }
+    .news-wrap .news-wrap-header .n-w-h-i {
+      float: left;
+      width: 33.3%;
+      background: #c2c2c2;
+      border-bottom: 1px solid #488AD8;
+      text-align: center; }
+    .news-wrap .news-wrap-header .n-w-h-i.selected {
+      color: #488AD8;
+      background: #fff;
+      border-top: 2px solid #488AD8;
+      border-bottom: none; }
+  .news-wrap .news-wrap-list {
+    display: none;
+    padding: 11px 7px 11px 12px;
+    width: 100%;
+    height: 500px; }
+    .news-wrap .news-wrap-list .n-l-i {
+      display: block;
+      font-size: 14px;
+      line-height: 24px;
+      cursor: pointer; }
+      .news-wrap .news-wrap-list .n-l-i a {
+        color: #333; }
+        .news-wrap .news-wrap-list .n-l-i a:hover {
+          color: #488AD8;
+          text-decoration: underline;
+          transition: all .25s; }
+      .news-wrap .news-wrap-list .n-l-i:first-child {
+        text-align: center;
+        font-size: 18px;
+        line-height: 32px; }
+    .news-wrap .news-wrap-list .n-l-i:not(:first-child):before {
+      float: left;
+      width: 4px;
+      height: 4px;
+      margin: 10px;
+      background: #232323;
+      border-radius: 2px;
+      content: ''; }
+  .news-wrap .news-wrap-list.selected {
+    display: block; }
+
+/**
+ * 3.3 - Health Info Block
+ **/
+.health-info {
+  width: 230px;
+  height: 400px;
+  outline: 1px solid #ccc;
+  background: #fff; }
+  .health-info .health-info-header {
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: #c2c2c2;
+    border-top: 2px solid #488AD8; }
 
 /*# sourceMappingURL=home.css.map */

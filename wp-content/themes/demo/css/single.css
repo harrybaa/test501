@@ -1,0 +1,118 @@
+@charset "UTF-8";
+/**
+ * author: wliu
+ * description: for index
+ * date: 2015/3/25
+ */
+/**
+ * 0.0 - main content
+ **/
+/**
+ * author: wliu
+ * description: for test 501
+ * date: 2015/3/17
+ */
+.content {
+  width: 980px;
+  margin: 0 auto; }
+
+/**
+ * 1.0 - Search Block
+ **/
+.search-wrapper {
+  width: 100%;
+  height: 80px; }
+  .search-wrapper .logo {
+    width: 120px;
+    height: 80px;
+    content: '杩欓噷鏄疞OGO'; }
+  .search-wrapper .search-block {
+    width: 200px;
+    height: 30px;
+    margin: 25px 10px; }
+    .search-wrapper .search-block .input-block {
+      float: left;
+      padding: 0;
+      width: 150px;
+      height: 30px;
+      border: none;
+      line-height: 30px;
+      background: #fff;
+      border-radius: 2px 0 0 2px; }
+    .search-wrapper .search-block .input-submit {
+      float: left;
+      width: 50px;
+      height: 30px;
+      color: #fff;
+      border: none;
+      background: #488AD8;
+      border-radius: 0 2px 2px 0;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none; }
+  .search-wrapper .forum {
+    width: 50px;
+    height: 30px;
+    margin: 25px 0;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    background: #488AD8;
+    border-radius: 2px;
+    cursor: pointer; }
+
+/**
+ * 2.0 - Main Block
+ **/
+.site-main {
+  width: 980px;
+  margin: 10px auto; }
+  .site-main .left-block {
+    float: left;
+    width: 680px; }
+  .site-main .right-block {
+    float: left;
+    width: 260px;
+    margin-left: 20px; }
+
+/**
+ * 2.1 - Post Block
+ **/
+.post-wrapper {
+  padding: 24px 16px;
+  width: 100%;
+  min-height: 200px;
+  font-size: 16px;
+  line-height: 175%;
+  background: #fff; }
+  .post-wrapper .post {
+    margin-bottom: 60px; }
+    .post-wrapper .post .entry-title {
+      width: 100%;
+      height: 42px;
+      margin: 0 auto 20px auto;
+      font-size: 24px;
+      line-height: 42px;
+      text-align: center; }
+    .post-wrapper .post p {
+      margin-top: 10px; }
+
+/**
+ * 2.2 - Navi Block
+ **/
+.navi .health-info {
+  width: 100%;
+  height: 400px;
+  outline: 1px solid #ccc;
+  background: #fff; }
+  .navi .health-info .health-info-header {
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: #c2c2c2;
+    border-top: 2px solid #488AD8; }
+
+/*# sourceMappingURL=single.css.map */

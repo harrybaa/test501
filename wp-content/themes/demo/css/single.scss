@@ -1,0 +1,129 @@
+/**
+ * author: wliu
+ * description: for index
+ * date: 2015/3/25
+ */
+
+/**
+ * 0.0 - main content
+ **/
+ @import "mixins.scss";
+ $blue: #488AD8;
+ $header_gray: #c2c2c2;
+.content{
+  width: 980px;
+  margin: 0 auto;
+}
+
+/**
+ * 1.0 - Search Block
+ **/
+.search-wrapper{
+  width: 100%;
+  height: 80px;
+  .logo{
+    width: 120px;
+    height: 80px;
+    content: '这里是LOGO';
+  }
+  .search-block{
+    width: 200px;
+    height: 30px;
+    margin: 25px 10px;
+    .input-block{
+      float: left;
+      padding: 0;
+      width: 150px;
+      height: 30px;
+      border: none;
+      line-height: 30px;
+      background: #fff;
+      border-radius: 2px 0 0 2px;
+    }
+    .input-submit{
+      float: left;
+      width: 50px;
+      height: 30px;
+      color: #fff;
+      border: none;
+      background: #488AD8;
+      border-radius: 0 2px 2px 0;
+      @include appearance_none;
+    }
+  }
+  .forum{
+    width: 50px;
+    height: 30px;
+    margin: 25px 0;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    background: #488AD8;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+}
+
+/**
+ * 2.0 - Main Block
+ **/
+.site-main{
+  width: 980px;
+  margin: 10px auto;
+  .left-block{
+    float: left;
+    width: 680px;
+  }
+  .right-block{
+    float: left;
+    width: 260px;
+    margin-left: 20px;
+  }
+}
+/**
+ * 2.1 - Post Block
+ **/
+.post-wrapper{
+  padding: 24px 16px;
+  width: 100%;
+  min-height: 200px;
+  font-size: 16px;
+  line-height: 175%;
+  background: #fff;
+  .post{
+    margin-bottom: 60px;
+    .entry-title{
+      width: 100%;
+      height: 42px;
+      margin: 0 auto 20px auto;
+      font-size: 24px;
+      line-height: 42px;
+      text-align: center;
+    }
+    p{
+      margin-top: 10px;
+    }
+  }
+}
+
+/**
+ * 2.2 - Navi Block
+ **/
+.navi{
+  .health-info{
+    width: 100%;
+    height: 400px;
+    outline: 1px solid #ccc;
+    background: #fff;
+    .health-info-header{
+      width: 100%;
+      height: 40px;
+      font-size: 20px;
+      line-height: 40px;
+      text-align: center;
+      color: #fff;
+      background: $header_gray;
+      border-top: 2px solid $blue;
+    }
+  }
+}

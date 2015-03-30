@@ -45,6 +45,93 @@ get_header(); ?>
     </ul>
   </div>
 
+  <div class='section clearfix'>
+    <div class='left'>
+      <div class='gallery-news'>
+        This is a gallery news.
+      </div>
+    </div>
+    <div class='mid'>
+      <div class='news-wrap'>
+        <ul class='news-wrap-header clearfix'>
+          <li class='n-w-h-i selected' data-name='today_news'>当日头条</li>
+          <li class='n-w-h-i' data-name='advices'>就医指南</li>
+          <li class='n-w-h-i' data-name='heathy_tips'>健康速递</li>
+        </ul>
+        <div id='today_news' class='news-wrap-list selected'>
+
+          <?php if ( have_posts('today_news') ) : ?>
+
+            <?php
+            // Start the loop.
+            while ( have_posts('today_news') ) : the_post('today_news');
+            if ( in_category( 'today_news' )):
+              echo "<p class='n-l-i'><a href='";
+              the_permalink();
+              echo "'>";
+              the_title();
+              echo "</a></p>";
+            endif;
+            // End the loop.
+            endwhile;
+
+            else :
+              echo "没有相关文章";
+
+          endif;
+          ?>
+
+        </div>
+        <div id='advices' class='news-wrap-list'>
+
+          <?php if ( have_posts() ) : ?>
+
+            <?php
+            // Start the loop.
+            while ( have_posts() ) : the_post();
+            if ( in_category( 'advices' )):
+              echo "<p class='n-l-i'><a href='";
+              the_permalink();
+              echo "'>";
+              the_title();
+              echo "</a></p>";
+            endif;
+            // End the loop.
+            endwhile;
+
+            else :
+              echo "没有相关文章";
+
+          endif;
+          ?>
+
+        </div>
+        <div id='heathy_tips' class='news-wrap-list'>
+        </div>
+      </div>
+    </div>
+    <div class='right'>
+      <div class='health-info'>
+        <div class='health-info-header'>健康信息</div>
+      </div>
+    </div>
+  </div>
+
 </div><!-- .content-area -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+  rigestEvent();
+});
+
+function rigestEvent(){
+  $('.n-w-h-i').hover(function(){
+    $(this).addClass('selected');
+    $(this).siblings().removeClass('selected');
+    $('#'+$(this).data('name')).addClass('selected');
+    $('#'+$(this).data('name')).siblings().removeClass('selected');
+  }, function(){});
+}
+</script>
 
 <?php get_footer(); ?>
