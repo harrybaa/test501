@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+    <!DOCTYPE sqlMap        
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"        
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Board">
+
+	
+	<typeAlias alias="boarda" type="com.bbs.model.Board" />
+	<insert id="boardadd" parameterClass="boarda">  
+     <![CDATA[  
+       insert into board(id,name,master,placard) values(#id#,#name#,#master#,#placard#)  
+        ]]><!-- 注册时的插入 -->
+	</insert>
+	
+	<typeAlias alias="boardb" type="com.bbs.model.Board" />
+	<select id="boardsearch" parameterClass="boardb" resultClass="boardb">  
+     <![CDATA[  
+       select * from board
+        ]]>
+	</select>
+	
+	<typeAlias alias="boardc" type="com.bbs.model.Board" />
+	<select id="boarddelete" parameterClass="boardc" resultClass="boardc">  
+     <![CDATA[  
+       delete from board where id=#id#
+        ]]>
+	</select>
+	
+	
+</sqlMap>

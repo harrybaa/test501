@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+    <!DOCTYPE sqlMap        
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"        
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Bbs">
+	
+	<typeAlias alias="bbsa" type="com.bbs.model.Bbs" />
+	<insert id="bbsadd" parameterClass="bbsa">  
+     <![CDATA[  
+       insert into bbs(id,boardId,title,content,sender,sendtime,isTop,isGood) values(#id#,#boardId#,#title#,#content#,#sender#,#sendtime#,#isTop#,#isGood#)  
+        ]]><!-- 注册时的插入 -->
+	</insert>
+	
+	<typeAlias alias="bbsb" type="com.bbs.model.Bbs" />
+	<select id="bbssearch" parameterClass="bbsb" resultClass="bbsb">  
+     <![CDATA[  
+       select * from bbs
+        ]]>
+	</select>
+	
+	<typeAlias alias="bbsc" type="com.bbs.model.Bbs" />
+	<select id="bbsdelete" parameterClass="bbsc" resultClass="bbsc">  
+     <![CDATA[  
+       delete from bbs where id=#id#
+        ]]>
+	</select>
+	
+	<typeAlias alias="bbsd" type="com.bbs.model.Bbs" />
+	<select id="bbsshowbyid" parameterClass="bbsd" resultClass="bbsd">  
+     <![CDATA[  
+       select * from bbs where id=#id#
+        ]]>
+	</select>
+	
+</sqlMap>

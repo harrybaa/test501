@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- 数据库德配置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/myproject</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value></value>
+		</property>
+	</bean>
+
+	<!-- 读取ibatis配置文件 -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="configLocation">
+			<value>classpath:SqlMapConfig.xml</value>
+		</property>
+	</bean>
+
+	<bean id="userDao" class="com.bbs.dao.impl.UserDaoImpl">
+	<property name="client">
+			<ref local="sqlMapClient"/>
+		</property>
+	</bean>
+	<bean id="userService" class="com.bbs.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+	</bean>
+	<bean id="user" class="com.bbs.model.User" />
+
+	<bean id="registerAction" class="com.bbs.action.user.RegisterAction"
+		scope="prototype">
+		<property name="user" ref="user" />
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean id="loginAction" class="com.bbs.action.user.LoginAction"
+		scope="prototype">
+		<property name="user" ref="user" />
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean id="showUserAction" class="com.bbs.action.user.ShowUserAction"
+		scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean id="deleteUserAction" class="com.bbs.action.user.DeleteUserAction"
+		scope="prototype">
+		<property name="userService" ref="userService" />
+		<property name="user" ref="user" />
+	</bean>
+	<bean id="editPUserAction" class="com.bbs.action.user.EditPUserAction"
+		scope="prototype">
+		<property name="userService" ref="userService" />
+		<property name="user" ref="user" />
+	</bean>
+	
+	<bean id="editUserAction" class="com.bbs.action.user.EditUserAction"
+		scope="prototype">
+		<property name="userService" ref="userService" />
+		<property name="user" ref="user" />
+	</bean>
+	
+</beans>
