@@ -1,6 +1,6 @@
 /**
  * author: wliu
- * description: for index
+ * description: for index page and subjects pages.
  * date: 2015/3/20
  */
 
@@ -8,8 +8,7 @@
  * 0.0 - main content
  **/
  @import "mixins.scss";
- $blue: #488AD8;
- $header_gray: #c2c2c2;
+
 .content{
   width: 980px;
   margin: 0 auto;
@@ -167,6 +166,7 @@
       line-height: 24px;
       cursor: pointer;
       a{
+        text-decoration: none;
         color: #333;
         &:hover{
           color: $blue;

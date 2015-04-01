@@ -1,16 +1,17 @@
 <?php
+/* Template Name: default-subject */
+
 /**
- * Template: 主题首页
+ * The template for default subjects-page.
  *
  * @package: Wordpress 4.1
  * @author: wliu
- * Date: 2015/3/17
+ * Date: 2015/3/30
  */
 
 get_header(); ?>
 
-<div id='primary' class='content'>
-
+<div id="primary" class="content">
   <div class='search-wrapper clearfix'>
     <div class='logo left'></div>
     <div class='search-block left'>
@@ -51,87 +52,44 @@ get_header(); ?>
         This is a gallery news.
       </div>
     </div>
+
     <div class='mid'>
       <div class='news-wrap'>
-        <ul class='news-wrap-header clearfix'>
-          <li class='n-w-h-i selected' data-name='today_news'>当日头条</li>
-          <li class='n-w-h-i' data-name='advices'>就医指南</li>
-          <li class='n-w-h-i' data-name='health_tips'>健康速递</li>
-        </ul>
-        <div id='today_news' class='news-wrap-list selected'>
+        <div class='wrap-header'>聚焦热点</div>
+        <div class='news-wrap-list selected'>
 
-          <?php if ( have_posts('today_news') ) : ?>
-
-            <?php
-            // Start the loop.
-            while ( have_posts('today_news') ) : the_post('today_news');
-            if ( in_category( 'today_news' )):
+          <?php 
+            global $post;
+            //从url参数中的subject获取分类信息，通过分类信息展示不同的页面主题，拉取不同的文章。
+            $subject = $_GET['subject'];
+            switch ($subject) {
+              case 'man':
+                $category_id = 5;
+                break;
+              case 'woman':
+                $category_id = 6;
+                break;
+              default:
+                break;
+            }
+            $args = array(
+              'numberposts' => 10,
+              'category' => $category_id,
+            );
+            $custom_posts = get_posts($args);
+            foreach($custom_posts as $post) : setup_postdata($post);
               echo "<p class='n-l-i'><a href='";
               the_permalink();
               echo "'>";
               the_title();
               echo "</a></p>";
-            endif;
-            // End the loop.
-            endwhile;
-
-            else :
-              echo "没有相关文章";
-
-          endif;
-          ?>
-
-        </div>
-        <div id='advices' class='news-wrap-list'>
-
-          <?php if ( have_posts() ) : ?>
-
-            <?php
-            // Start the loop.
-            while ( have_posts() ) : the_post();
-            if ( in_category( 'advices' )):
-              echo "<p class='n-l-i'><a href='";
-              the_permalink();
-              echo "'>";
-              the_title();
-              echo "</a></p>";
-            endif;
-            // End the loop.
-            endwhile;
-
-            else :
-              echo "没有相关文章";
-
-          endif;
-          ?>
-
-        </div>
-        <div id='health_tips' class='news-wrap-list'>
-
-          <?php if ( have_posts() ) : ?>
-
-            <?php
-            // Start the loop.
-            while ( have_posts() ) : the_post();
-            if ( in_category( 'health_tips' )):
-              echo "<p class='n-l-i'><a href='";
-              the_permalink();
-              echo "'>";
-              the_title();
-              echo "</a></p>";
-            endif;
-            // End the loop.
-            endwhile;
-
-          else :
-              echo "没有相关文章";
-
-          endif;
+            endforeach;
           ?>
 
         </div>
       </div>
     </div>
+    
     <div class='right'>
       <div class='health-info'>
         <div class='health-info-header'>健康信息</div>
@@ -143,16 +101,32 @@ get_header(); ?>
 
 <script type="text/javascript">
 $(document).ready(function(){
-  rigestEvent();
+  var subject = getUrlVar('subject'),
+      subject_cn = subject_i18n(subject);
+  setTitle(subject_cn);
 });
 
-function rigestEvent(){
-  $('.n-w-h-i').hover(function(){
-    $(this).addClass('selected');
-    $(this).siblings().removeClass('selected');
-    $('#'+$(this).data('name')).addClass('selected');
-    $('#'+$(this).data('name')).siblings().removeClass('selected');
-  }, function(){});
+function getUrlVar(name){
+  var vars = {}, hash;
+  var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+  for (var i = 0; i < hashes.length; i++) {
+      hash = hashes[i].split('=');
+      if(hash[0] === name) return hash[1];
+  }
+  return;
+}
+
+function subject_i18n(subject){
+  var cn = {
+    'man': '男科',
+    'woman': '妇科',
+    'children': '儿科'
+  }
+  return cn[subject];
+}
+
+function setTitle(subject){
+  $('.search-wrapper .logo').html(subject);
 }
 </script>
 

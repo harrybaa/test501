@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /**
  * author: wliu
- * description: for index
+ * description: for index page and subjects pages.
  * date: 2015/3/20
  */
 /**
@@ -186,6 +186,7 @@
       line-height: 24px;
       cursor: pointer; }
       .news-wrap .news-wrap-list .n-l-i a {
+        text-decoration: none;
         color: #333; }
         .news-wrap .news-wrap-list .n-l-i a:hover {
           color: #488AD8;

@@ -23,6 +23,10 @@
   <?php if ( is_home() ) { ?>
   <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/home.css"
   type="text/css" media="screen" />
+  <?php } else if( is_page() ) { ?>
+  <!-- subjects页面与index页面很多元素相同，重复使用home.css -->
+  <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/home.css" type="text/css" media="screen"/>
+  <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/subjects.css" type="text/css" media="screen"/>
   <?php } else if( is_single() ) { ?>
   <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/single.css" type="text/css" media="screen"/>
   <?php } ?>

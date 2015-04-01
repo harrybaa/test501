@@ -1,0 +1,17 @@
+/**
+ * author: wliu
+ * description: for subpages
+ * date: 2015/3/30
+ */
+@import "mixins.scss";
+
+.wrap-header{
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  background: $header_gray;
+  border-top: 2px solid $blue;
+}
