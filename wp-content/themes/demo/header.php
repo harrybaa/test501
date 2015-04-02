@@ -17,7 +17,8 @@
   <meta name='viewport' content='width=device-width'>
   <script>(function(){document.documentElement.className='js'})();</script>
   <script type="text/javascript" src='<?php bloginfo('template_url'); ?>/js/jquery-1.11.2.min.js'></script>
-  <!-- css reset -->
+  
+  <!-- css reset for every page -->
   <link rel="stylesheet" type="text/css" href="<?php bloginfo('template_url') ?>/style.css">
   <!-- 每个页面不同的css文件 -->
   <?php if ( is_home() ) { ?>
@@ -29,6 +30,7 @@
   <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/subjects.css" type="text/css" media="screen"/>
   <?php } else if( is_single() ) { ?>
   <link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/css/single.css" type="text/css" media="screen"/>
+  
   <?php } ?>
 </head>
 

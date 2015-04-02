@@ -22,9 +22,9 @@ get_header(); ?>
 
   <div class='category '>
     <ul class='cate-list clearfix'>
-      <li class='cate-i i1'><a href="#">男科</a></li>
-      <li class='cate-i i2'><a href="#">妇科</a></li>
-      <li class='cate-i i3'><a href="#">儿科</a></li>
+      <li class='cate-i i1'><a href="http://localhost/gitPro/test501/?page_id=21&subject=man">男科</a></li>
+      <li class='cate-i i2'><a href='http://localhost/gitPro/test501/?page_id=21&subject=woman'>妇科</a></li>
+      <li class='cate-i i3'><a href='http://localhost/gitPro/test501/?page_id=21&subject=children'>儿科</a></li>
       <li class='cate-i i4'><a href="#">整形</a></li>
       <li class='cate-i i5'><a href="#">不孕不育</a></li>
       <li class='cate-i i6'><a href="#">肿瘤科</a></li>
@@ -60,73 +60,58 @@ get_header(); ?>
         </ul>
         <div id='today_news' class='news-wrap-list selected'>
 
-          <?php if ( have_posts('today_news') ) : ?>
-
-            <?php
-            // Start the loop.
-            while ( have_posts('today_news') ) : the_post('today_news');
-            if ( in_category( 'today_news' )):
+          <?php
+            global $post;
+            $args = array(
+              'numberposts' => 10,
+              'category' => 2,
+            );
+            $custom_posts = get_posts($args);
+            foreach($custom_posts as $post) : setup_postdata($post);
               echo "<p class='n-l-i'><a href='";
               the_permalink();
               echo "'>";
               the_title();
               echo "</a></p>";
-            endif;
-            // End the loop.
-            endwhile;
-
-            else :
-              echo "没有相关文章";
-
-          endif;
+            endforeach;
           ?>
 
         </div>
         <div id='advices' class='news-wrap-list'>
 
-          <?php if ( have_posts() ) : ?>
-
-            <?php
-            // Start the loop.
-            while ( have_posts() ) : the_post();
-            if ( in_category( 'advices' )):
+          <?php
+            global $post;
+            $args = array(
+              'numberposts' => 10,
+              'category' => 1,
+            );
+            $custom_posts = get_posts($args);
+            foreach($custom_posts as $post) : setup_postdata($post);
               echo "<p class='n-l-i'><a href='";
               the_permalink();
               echo "'>";
               the_title();
               echo "</a></p>";
-            endif;
-            // End the loop.
-            endwhile;
-
-            else :
-              echo "没有相关文章";
-
-          endif;
+            endforeach;
           ?>
 
         </div>
         <div id='health_tips' class='news-wrap-list'>
 
-          <?php if ( have_posts() ) : ?>
-
-            <?php
-            // Start the loop.
-            while ( have_posts() ) : the_post();
-            if ( in_category( 'health_tips' )):
+          <?php
+            global $post;
+            $args = array(
+              'numberposts' => 10,
+              'category' => 3,
+            );
+            $custom_posts = get_posts($args);
+            foreach($custom_posts as $post) : setup_postdata($post);
               echo "<p class='n-l-i'><a href='";
               the_permalink();
               echo "'>";
               the_title();
               echo "</a></p>";
-            endif;
-            // End the loop.
-            endwhile;
-
-          else :
-              echo "没有相关文章";
-
-          endif;
+            endforeach;
           ?>
 
         </div>
