@@ -14,7 +14,7 @@ get_header(); ?>
 <div id="primary" class="content">
   <div class='banner'></div>
 
-  <div class='login-section'>
+  <div class='login-section '>
     <div class=''></div>
   </div>
 </div>

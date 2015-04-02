@@ -47,18 +47,21 @@ get_header(); ?>
 
   <div class='section clearfix'>
     <div class='left'>
-      <div class='gallery-news'>
-        This is a gallery news.
+      <div class='online-doc block'>
+        <div class='wrap-header'>在线医生</div>
       </div>
     </div>
     <div class='mid'>
-      <div class='news-wrap'>
+      <div class='news-wrap block'>
         <ul class='news-wrap-header clearfix'>
           <li class='n-w-h-i selected' data-name='today_news'>当日头条</li>
           <li class='n-w-h-i' data-name='advices'>就医指南</li>
           <li class='n-w-h-i' data-name='health_tips'>健康速递</li>
         </ul>
         <div id='today_news' class='news-wrap-list selected'>
+          <div class='gallery-news'>
+            This is a gallery news.
+          </div>
 
           <?php
             global $post;
@@ -78,6 +81,9 @@ get_header(); ?>
 
         </div>
         <div id='advices' class='news-wrap-list'>
+          <div class='gallery-news'>
+            This is a gallery news.
+          </div>
 
           <?php
             global $post;
@@ -97,31 +103,35 @@ get_header(); ?>
 
         </div>
         <div id='health_tips' class='news-wrap-list'>
-
-          <?php
-            global $post;
-            $args = array(
-              'numberposts' => 10,
-              'category' => 3,
-            );
-            $custom_posts = get_posts($args);
-            foreach($custom_posts as $post) : setup_postdata($post);
-              echo "<p class='n-l-i'><a href='";
-              the_permalink();
-              echo "'>";
-              the_title();
-              echo "</a></p>";
-            endforeach;
-          ?>
-
+          This block for health campanion information.
         </div>
       </div>
     </div>
     <div class='right'>
-      <div class='health-info'>
-        <div class='health-info-header'>健康信息</div>
+      <div class='login block'>
+        <div class='login-patient'>
+          患者登录
+        </div>
+        <div class='login-doctor'>
+          医生登录
+        </div>
+      </div>
+
+      <div class='current-query block'>
+        <div class='wrap-header'>在线咨询</div>
+      </div>
+
+      <div class='hot-query block'>
+        <div class='wrap-header'>热门咨询</div>
+      </div>
+      <div>
+
       </div>
     </div>
+  </div>
+
+  <div class='section block appointment'>
+
   </div>
 
 </div><!-- .content-area -->

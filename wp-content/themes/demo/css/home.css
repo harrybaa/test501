@@ -139,24 +139,33 @@
     float: left;
     width: 440px;
     margin: 0 5px; }
+  .section .wrap-header {
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: #c2c2c2;
+    border-top: 2px solid #488AD8; }
 
-/**
- * 3.1 - Gallery News
- **/
-.gallery-news {
-  width: 300px;
-  height: 235px;
+.block {
   outline: 1px solid #ccc;
   background: #fff; }
+
+/**
+ * 3.1 - Online Doctors
+ **/
+.online-doc {
+  width: 300px;
+  height: 600px; }
 
 /**
  * 3.2 - News
  **/
 .news-wrap {
   width: 440px;
-  height: 540px;
-  outline: 1px solid #ccc;
-  background: #fff; }
+  height: 600px; }
   .news-wrap .news-wrap-header {
     width: 100%;
     height: 40px;
@@ -180,6 +189,10 @@
     padding: 11px 7px 11px 12px;
     width: 100%;
     height: 500px; }
+    .news-wrap .news-wrap-list .gallery-news {
+      width: 400px;
+      height: 300px;
+      margin: 10px auto; }
     .news-wrap .news-wrap-list .n-l-i {
       display: block;
       font-size: 14px;
@@ -208,21 +221,37 @@
     display: block; }
 
 /**
- * 3.3 - Health Info Block
+ * 3.3 - Login Wrapper
  **/
-.health-info {
+.login {
   width: 230px;
-  height: 400px;
-  outline: 1px solid #ccc;
-  background: #fff; }
-  .health-info .health-info-header {
+  height: 200px; }
+  .login .login-patient {
     width: 100%;
-    height: 40px;
-    font-size: 20px;
-    line-height: 40px;
-    text-align: center;
-    color: #fff;
-    background: #c2c2c2;
-    border-top: 2px solid #488AD8; }
+    height: 100px; }
+  .login .login-doctor {
+    width: 100%;
+    height: 100px; }
+
+/**
+ * 3.4 - Current Query Wrapper
+ **/
+.current-query {
+  width: 230px;
+  height: 200px; }
+
+/**
+ * 3.5 - Hot Query Wrapper
+ **/
+.hot-query {
+  width: 230px;
+  height: 200px; }
+
+/**
+ * 4.0 - Appointment
+ **/
+.appointment {
+  width: 100%;
+  height: 400px; }
 
 /*# sourceMappingURL=home.css.map */
