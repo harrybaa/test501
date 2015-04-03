@@ -56,14 +56,14 @@ height:125px;
 	  </tr>
   	</table>
   	
-  	<s:iterator value="#session.list">
+  	<s:iterator value="#session.list" id="a">
 		<table width="800">
 		<tr  bgcolor="#E4EFFA">
 		  <td width="118" rowspan="3"><img src="images/face/user/12.jpg" width="60"  height="80"/><br />
 			<s:property value="sender" /><br />
 			<br />
 		  <a href="#"><img src="images/index/add.jpg" width="78" height="21" border="0"/></a> </td>
-		  <td width="596" height="2"><div align="left"><font color="red"><s:property value="sendtime" /></div></td>
+		  <td width="596" height="2"><div align="left"><font color="red"><s:property value="sendTime" /></div></td>
 		  <td width="70"><div align="right"><a href="#">引用</a> <a href="#">回复</a> </div></td>
 		</tr>
 		<tr>
