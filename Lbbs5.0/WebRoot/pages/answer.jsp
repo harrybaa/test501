@@ -41,7 +41,7 @@ height:125px;
 			<s:iterator value="#request.bbs"><s:property value="sender" /></s:iterator><br />
 			<br />
 		  <a href="#"><img src="images/index/add.jpg" width="78" height="21" border="0"/></a> </td>
-		  <td width="596" height="2"><div align="left"><font color="red"><s:iterator value="#request.bbs"><s:property value="sendtime" /></s:iterator></div></td>
+		  <td width="596" height="2"><div align="left"><font color="red"><s:iterator value="#request.bbs"><s:date name="sendtime" format="yyyy-MM-dd HH:mm:ss" /></s:iterator></div></td>
 		  <td width="70"><div align="right"><a href="#">引用</a> <a href="#">回复</a> </div></td>
 		</tr>
 		<tr>
@@ -63,7 +63,7 @@ height:125px;
 			<s:property value="sender" /><br />
 			<br />
 		  <a href="#"><img src="images/index/add.jpg" width="78" height="21" border="0"/></a> </td>
-		  <td width="596" height="2"><div align="left"><font color="red"><s:property value="sendTime" /></div></td>
+		  <td width="596" height="2"><div align="left"><font color="red"><s:date name="sendTime" format="yyyy-MM-dd HH:mm:ss" /></div></td>
 		  <td width="70"><div align="right"><a href="#">引用</a> <a href="#">回复</a> </div></td>
 		</tr>
 		<tr>
