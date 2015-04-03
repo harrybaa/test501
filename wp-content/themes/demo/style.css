@@ -88,6 +88,9 @@ body {
   visibility: hidden;
   content: ' '; }
 
+.img-wrapper img {
+  width: 100%; }
+
 /**
  * 3.0 - Header Default
  */

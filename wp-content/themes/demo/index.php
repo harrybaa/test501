@@ -9,6 +9,8 @@
 
 get_header(); ?>
 
+<script type="text/javascript" src='<?php bloginfo('template_url'); ?>/js/template.js'></script>
+
 <div id='primary' class='content'>
 
   <div class='search-wrapper clearfix'>
@@ -20,35 +22,48 @@ get_header(); ?>
     <div class='forum left'>论坛</div>
   </div>
 
-  <div class='category '>
-    <ul class='cate-list clearfix'>
-      <li class='cate-i i1'><a href="http://localhost/gitPro/test501/?page_id=21&subject=man">男科</a></li>
-      <li class='cate-i i2'><a href='http://localhost/gitPro/test501/?page_id=21&subject=woman'>妇科</a></li>
-      <li class='cate-i i3'><a href='http://localhost/gitPro/test501/?page_id=21&subject=children'>儿科</a></li>
-      <li class='cate-i i4'><a href="#">整形</a></li>
-      <li class='cate-i i5'><a href="#">不孕不育</a></li>
-      <li class='cate-i i6'><a href="#">肿瘤科</a></li>
-      <li class='cate-i i7'><a href="#">胃病</a></li>
-      <li class='cate-i i8'><a href="#">糖尿病</a></li>
-      <li class='cate-i i9'><a href="#">心血管</a></li>
-      <li class='cate-i i10'><a href="#">肝脏科</a></li>
-      <li class='cate-i i11'><a href="#">肾病科</a></li>
-      <li class='cate-i i12'><a href="#">肛肠科</a></li>
-      <li class='cate-i i13'><a href="#">泌尿科</a></li>
-      <li class='cate-i i14'><a href="#">耳鼻喉</a></li>
-      <li class='cate-i i15'><a href="#">眼科</a></li>
-      <li class='cate-i i16'><a href="#">口腔科</a></li>
-      <li class='cate-i i17'><a href="#">骨科</a></li>
-      <li class='cate-i i18'><a href="#">皮肤科</a></li>
-      <li class='cate-i i19'><a href="#">精神科</a></li>
-      <li class='cate-i i20'><a href="#">其他</a></li>
-    </ul>
-  </div>
-
   <div class='section clearfix'>
     <div class='left'>
       <div class='online-doc block'>
         <div class='wrap-header'>在线医生</div>
+        <!-- categories list -->
+        <ul class='cate-list'>
+          <li class='cate-i i1' data-subject='男科'>
+            <div class='cate-header clearfix'>
+              <div class='cate-icon left'></div>
+              <a class='subject-link left' href="http://localhost/gitPro/test501/?page_id=21&subject=man">男科</a>
+            </div>
+            <div class='doc-wrapper clearfix'></div>  
+          </li>
+          <li class='cate-i i2' data-subject='妇科'>
+            <div class='cate-header clearfix'>
+              <div class='cate-icon left'></div>
+              <a class='subject-link left' href="http://localhost/gitPro/test501/?page_id=21&subject=man">妇科</a>
+            </div>
+            <div class='doc-wrapper clearfix'></div>
+          </li>
+          <li class='cate-i i3' data-subject='儿科'>
+            <div class='cate-header clearfix'>
+              <div class='cate-icon left'></div>
+              <a class='subject-link left' href="http://localhost/gitPro/test501/?page_id=21&subject=man">儿科</a>
+            </div>
+            <div class='doc-wrapper clearfix'></div>
+          </li>
+          <li class='cate-i i4' data-subject='胃病科'>
+            <div class='cate-header clearfix'>
+              <div class='cate-icon left'></div>
+              <a class='subject-link left' href="http://localhost/gitPro/test501/?page_id=21&subject=man">胃病科</a>
+            </div>
+            <div class='doc-wrapper clearfix'></div>
+          </li>
+          <li class='cate-i i5' data-subject='肾脏科'>
+            <div class='cate-header clearfix'>
+              <div class='cate-icon left'></div>
+              <a class='subject-link left' href="http://localhost/gitPro/test501/?page_id=21&subject=man">肾脏科</a>
+            </div>
+            <div class='doc-wrapper clearfix'></div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class='mid'>
@@ -108,11 +123,11 @@ get_header(); ?>
       </div>
     </div>
     <div class='right'>
-      <div class='login block'>
-        <div class='login-patient'>
+      <div class='login'>
+        <div class='login-patient block'>
           患者登录
         </div>
-        <div class='login-doctor'>
+        <div class='login-doctor block'>
           医生登录
         </div>
       </div>
@@ -136,9 +151,29 @@ get_header(); ?>
 
 </div><!-- .content-area -->
 
+<script id='temp_currentDocInfo' type="text/html">
+  <div class='doc-info-wrapper left'>
+    <div class='online-status left'></div>
+    <div class='head-pic img-wrapper left'></div>
+    <div class='right-info left'>
+      <span class='name'>{{name}}</span>
+      <span class='online'>在线</span>
+      <br>
+      <span class='department'>{{department}}</span>
+    </div>
+  </div>
+</script>
+<script id='temp_currentDocInfo_more' type="text/html">
+  <div class='more left'>
+    更<br>多<br>>>
+  </div>
+</script>
+
 <script type="text/javascript">
 $(document).ready(function(){
+  var currentDocAPI = './data/currentDocFake.json';
   rigestEvent();
+  loadCurrentDoc(currentDocAPI);
 });
 
 function rigestEvent(){
@@ -148,6 +183,54 @@ function rigestEvent(){
     $('#'+$(this).data('name')).addClass('selected');
     $('#'+$(this).data('name')).siblings().removeClass('selected');
   }, function(){});
+}
+
+function loadCurrentDoc(API){
+  $.ajax({
+    url: API,
+    dataType: 'json',
+    success: function(res){
+      console.log('Current Online Doc data loaded.');
+      renderCurrentDoc(res);
+    },
+    error: function(){
+      console.log('Faild to load Current Online Doc data.');
+    }
+  });
+}
+function renderCurrentDoc(data){
+  var cateData = {
+        '男科': [],
+        '妇科': [],
+        '儿科': [],
+        '胃病科': [],
+        '肾脏科': []
+      }, 
+      l = data.length, cate, html = '';
+
+  for(var i = 0;i < l;i++){
+    cate = data[i]['subject'];
+    //每个block最多显示两个现在医生信息
+    if(cateData[cate].length < 2){
+      cateData[cate].push(data[i]);
+    }
+  }
+
+  for(subject in cateData){
+    html = '';
+    if(cateData[subject]){
+      cateData[subject].forEach(function(data){
+        html += template('temp_currentDocInfo', data);
+      });
+    }
+    $('.cate-i').each(function(){
+      if($(this).data('subject') === subject){
+        $(this).find('.doc-wrapper').append(html).append(
+          template('temp_currentDocInfo_more')
+        );
+      }
+    });
+  }
 }
 </script>
 

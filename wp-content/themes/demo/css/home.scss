@@ -65,37 +65,7 @@
 /**
  * 2.0 - Category List
  **/
-.category{
-  width: 100%;
-  height: 100%;
-  margin: 5px 0;
-  .cate-i{
-    float: left;
-    padding-top: 40px;
-    width: 49px;
-    height: 60px;
-    text-align: center;
-    background: url('../../../../img/icon_cate.png') no-repeat;
-    a{
-      color: #333;
-      text-decoration: none;
-      transition: all .25s;
-      &:hover{
-        color: blue;
-        text-decoration: underline;
-      }
-    }
-    &:hover{
-      cursor: pointer;
-    }
-  }
-  /* set position info for every category icon */
-  @for $i from 1 to 20 {
-    .i#{$i}{
-      background-position: 56-$i*41px 0;
-    }
-  }
-}
+
 
 /**
  * 3.0 - Section Block
@@ -137,6 +107,97 @@
 .online-doc{
   width: 300px;
   height: 600px;
+  .cate-list{
+    width: 100%;
+    height: 100%;
+    .cate-i{
+      padding: 5px 0;
+      width: 100%;
+      border-bottom: dashed 1px #ccc;
+      .cate-header{
+        width: 100%;
+        height: 30px;
+        .cate-icon{
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          margin-left: 10px;
+          background-image: url('../../../../img/icon_cate.png');
+          background-repeat: no-repeat;
+        }
+        .subject-link{
+          max-width: 100px;
+          color: #333;
+          font-size: 16px;
+          line-height: 30px;
+          text-decoration: none;
+          transition: all .25s;
+          &:hover{
+            color: blue;
+            text-decoration: underline;
+          }
+        }
+      }
+      .doc-wrapper{
+        width: 100%;
+        height: 60px;
+        .doc-info-wrapper{
+          padding: 5px;
+          width: 130px;
+          height: 100%;
+          margin-left: 5px;
+          background: $block_bg_gray;
+          &:hover{
+            background: $block_bg_green;
+            outline: 1px solid $online_green;
+            cursor: pointer;
+          }
+          .online-status{
+            width: 5px;
+            height: 40px;
+            margin: 5px 0;
+            background: $online_green;
+          }
+          .head-pic{
+            width: 40px;
+            height: 40px;
+            margin: 5px 0;
+            background: url('../../../../img/default_head_pic.jpg') no-repeat;
+          }
+          .right-info{
+            width: 70px;
+            height: 30px;
+            margin-left: 3px;
+            font-size: 12px;
+            line-height: 15px;
+            .online{
+              color: $online_green;
+            }
+          }
+        }
+        .more{
+          padding: 6px 0;
+          width: 25px;
+          height: 60px;
+          margin-left: 5px;
+          text-align: center;
+          background: $block_bg_gray;
+          &:hover{
+            background: $block_bg_green;
+            outline: 1px solid $online_green;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  /* set position info for every category icon */
+  @for $i from 1 to 20 {
+    .i#{$i} .cate-icon{
+      background-position: 50-$i*43px -3px;
+    }
+  }
 }
 /**
  * 3.2 - News

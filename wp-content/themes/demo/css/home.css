@@ -64,66 +64,6 @@
 /**
  * 2.0 - Category List
  **/
-.category {
-  width: 100%;
-  height: 100%;
-  margin: 5px 0;
-  /* set position info for every category icon */ }
-  .category .cate-i {
-    float: left;
-    padding-top: 40px;
-    width: 49px;
-    height: 60px;
-    text-align: center;
-    background: url("../../../../img/icon_cate.png") no-repeat; }
-    .category .cate-i a {
-      color: #333;
-      text-decoration: none;
-      transition: all .25s; }
-      .category .cate-i a:hover {
-        color: blue;
-        text-decoration: underline; }
-    .category .cate-i:hover {
-      cursor: pointer; }
-  .category .i1 {
-    background-position: 15px 0; }
-  .category .i2 {
-    background-position: -26px 0; }
-  .category .i3 {
-    background-position: -67px 0; }
-  .category .i4 {
-    background-position: -108px 0; }
-  .category .i5 {
-    background-position: -149px 0; }
-  .category .i6 {
-    background-position: -190px 0; }
-  .category .i7 {
-    background-position: -231px 0; }
-  .category .i8 {
-    background-position: -272px 0; }
-  .category .i9 {
-    background-position: -313px 0; }
-  .category .i10 {
-    background-position: -354px 0; }
-  .category .i11 {
-    background-position: -395px 0; }
-  .category .i12 {
-    background-position: -436px 0; }
-  .category .i13 {
-    background-position: -477px 0; }
-  .category .i14 {
-    background-position: -518px 0; }
-  .category .i15 {
-    background-position: -559px 0; }
-  .category .i16 {
-    background-position: -600px 0; }
-  .category .i17 {
-    background-position: -641px 0; }
-  .category .i18 {
-    background-position: -682px 0; }
-  .category .i19 {
-    background-position: -723px 0; }
-
 /**
  * 3.0 - Section Block
  **/
@@ -158,7 +98,115 @@
  **/
 .online-doc {
   width: 300px;
-  height: 600px; }
+  height: 600px;
+  /* set position info for every category icon */ }
+  .online-doc .cate-list {
+    width: 100%;
+    height: 100%; }
+    .online-doc .cate-list .cate-i {
+      padding: 5px 0;
+      width: 100%;
+      border-bottom: dashed 1px #ccc; }
+      .online-doc .cate-list .cate-i .cate-header {
+        width: 100%;
+        height: 30px; }
+        .online-doc .cate-list .cate-i .cate-header .cate-icon {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          margin-left: 10px;
+          background-image: url("../../../../img/icon_cate.png");
+          background-repeat: no-repeat; }
+        .online-doc .cate-list .cate-i .cate-header .subject-link {
+          max-width: 100px;
+          color: #333;
+          font-size: 16px;
+          line-height: 30px;
+          text-decoration: none;
+          transition: all .25s; }
+          .online-doc .cate-list .cate-i .cate-header .subject-link:hover {
+            color: blue;
+            text-decoration: underline; }
+      .online-doc .cate-list .cate-i .doc-wrapper {
+        width: 100%;
+        height: 60px; }
+        .online-doc .cate-list .cate-i .doc-wrapper .doc-info-wrapper {
+          padding: 5px;
+          width: 130px;
+          height: 100%;
+          margin-left: 5px;
+          background: #E7E7E7; }
+          .online-doc .cate-list .cate-i .doc-wrapper .doc-info-wrapper:hover {
+            background: #A7F2AB;
+            outline: 1px solid #0EEA0E;
+            cursor: pointer; }
+          .online-doc .cate-list .cate-i .doc-wrapper .doc-info-wrapper .online-status {
+            width: 5px;
+            height: 40px;
+            margin: 5px 0;
+            background: #0EEA0E; }
+          .online-doc .cate-list .cate-i .doc-wrapper .doc-info-wrapper .head-pic {
+            width: 40px;
+            height: 40px;
+            margin: 5px 0;
+            background: url("../../../../img/default_head_pic.jpg") no-repeat; }
+          .online-doc .cate-list .cate-i .doc-wrapper .doc-info-wrapper .right-info {
+            width: 70px;
+            height: 30px;
+            margin-left: 3px;
+            font-size: 12px;
+            line-height: 15px; }
+            .online-doc .cate-list .cate-i .doc-wrapper .doc-info-wrapper .right-info .online {
+              color: #0EEA0E; }
+        .online-doc .cate-list .cate-i .doc-wrapper .more {
+          padding: 6px 0;
+          width: 25px;
+          height: 60px;
+          margin-left: 5px;
+          text-align: center;
+          background: #E7E7E7; }
+          .online-doc .cate-list .cate-i .doc-wrapper .more:hover {
+            background: #A7F2AB;
+            outline: 1px solid #0EEA0E;
+            cursor: pointer; }
+  .online-doc .i1 .cate-icon {
+    background-position: 7px -3px; }
+  .online-doc .i2 .cate-icon {
+    background-position: -36px -3px; }
+  .online-doc .i3 .cate-icon {
+    background-position: -79px -3px; }
+  .online-doc .i4 .cate-icon {
+    background-position: -122px -3px; }
+  .online-doc .i5 .cate-icon {
+    background-position: -165px -3px; }
+  .online-doc .i6 .cate-icon {
+    background-position: -208px -3px; }
+  .online-doc .i7 .cate-icon {
+    background-position: -251px -3px; }
+  .online-doc .i8 .cate-icon {
+    background-position: -294px -3px; }
+  .online-doc .i9 .cate-icon {
+    background-position: -337px -3px; }
+  .online-doc .i10 .cate-icon {
+    background-position: -380px -3px; }
+  .online-doc .i11 .cate-icon {
+    background-position: -423px -3px; }
+  .online-doc .i12 .cate-icon {
+    background-position: -466px -3px; }
+  .online-doc .i13 .cate-icon {
+    background-position: -509px -3px; }
+  .online-doc .i14 .cate-icon {
+    background-position: -552px -3px; }
+  .online-doc .i15 .cate-icon {
+    background-position: -595px -3px; }
+  .online-doc .i16 .cate-icon {
+    background-position: -638px -3px; }
+  .online-doc .i17 .cate-icon {
+    background-position: -681px -3px; }
+  .online-doc .i18 .cate-icon {
+    background-position: -724px -3px; }
+  .online-doc .i19 .cate-icon {
+    background-position: -767px -3px; }
 
 /**
  * 3.2 - News
