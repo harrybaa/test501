@@ -4,12 +4,19 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="struts_bbsAnswer" extends="struts-default">
+	<package name="struts_bbsAnswer" namespace="/bbsAnswer" extends="struts-default">
 		<interceptors>
 			<interceptor name="loginInterceptor" class="com.bbs.interceptor.LoginInterceptor"></interceptor>
 		</interceptors>
 		
 		<action name="addBbsAnswer" class="addBbsAnswerAction">
+			<result>/pages/answer.jsp</result>
+			<result name="login">/pages/login.jsp</result>
+			<interceptor-ref name="loginInterceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+		
+		<action name="allBbsAnswer" class="allBbsAnswerAction">
 			<result>/pages/answer.jsp</result>
 			<result name="login">/pages/login.jsp</result>
 			<interceptor-ref name="loginInterceptor" />

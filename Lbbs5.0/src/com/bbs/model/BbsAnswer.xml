@@ -11,5 +11,12 @@
         ]]><!-- 注册时的插入 -->
 	</insert>
 	
+	<typeAlias alias="bbsAnswerb" type="com.bbs.model.BbsAnswer" />
+	<select id="allbbsanswer" parameterClass="bbsAnswerb" resultClass="bbsAnswerb">  
+     <![CDATA[  
+       select * from bbsanswer where rootId=#rootId#
+        ]]>
+	</select>
+	
 </sqlMap>
 

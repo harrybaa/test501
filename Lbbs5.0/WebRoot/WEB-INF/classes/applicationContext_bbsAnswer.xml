@@ -44,5 +44,9 @@
 		<property name="bbsAnswerService" ref="bbsAnswerService" />
 		<property name="bbsAnswer" ref="bbsAnswer" />
 	</bean>
+	<bean id="allBbsAnswerAction" class="com.bbs.action.bbsAnswer.AllBbsAnswerAction">
+		<property name="bbsAnswerService" ref="bbsAnswerService" />
+		<property name="bbsAnswer" ref="bbsAnswer" />
+	</bean>
 	
 </beans>

@@ -2,8 +2,10 @@ package com.bbs.dao.impl;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 import com.bbs.dao.BbsAnswerDao;
+import com.bbs.model.Bbs;
 import com.bbs.model.BbsAnswer;
 import com.ibatis.sqlmap.client.SqlMapClient;
 
@@ -29,6 +31,20 @@ public class BbsAnswerDaoImpl implements BbsAnswerDao {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BbsAnswer> allBbsAnswer(BbsAnswer bbsAnswer) {
+		List<BbsAnswer> list = null;
+		try {
+			System.out.println(bbsAnswer.getRootId());
+			list = (List<BbsAnswer>) client.queryForList("allbbsanswer", bbsAnswer);
+			System.out.println(bbsAnswer.getRootId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

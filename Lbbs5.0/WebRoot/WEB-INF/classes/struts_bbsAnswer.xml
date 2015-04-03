@@ -16,5 +16,12 @@
 			<interceptor-ref name="defaultStack" />
 		</action>
 		
+		<action name="allBbsAnswer" class="allBbsAnswerAction">
+			<result>/pages/allanswer.jsp</result>
+			<result name="login">/pages/login.jsp</result>
+			<interceptor-ref name="loginInterceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+		
 	</package>
 </struts>
