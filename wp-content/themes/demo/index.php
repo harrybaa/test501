@@ -10,6 +10,7 @@
 get_header(); ?>
 
 <script type="text/javascript" src='<?php bloginfo('template_url'); ?>/js/template.js'></script>
+<script type="text/javascript" src='<?php bloginfo('template_url'); ?>/js/slide.js'></script>
 
 <div id='primary' class='content'>
 
@@ -75,9 +76,20 @@ get_header(); ?>
         </ul>
         <div id='today_news' class='news-wrap-list selected'>
           <div class='gallery-news'>
-            This is a gallery news.
+            <div class="slide">
+              <ul>
+                <li class='img-wrapper slide-item' style=" background:#E81216;" id="slide_item_0"><img src="img/banner03.jpg"></li>
+                <li class='img-wrapper slide-item' style=" background:#000000;" id="slide_item_1"><img src="img/banner02.jpg"></li>
+                <li class='img-wrapper slide-item' style=" background:#4144D7;" id="slide_item_2"><img src="img/banner01.jpg"></li>
+              </ul>
+              <a class="slide-pre"></a>
+              <a class="slide-next"></a>
+              <div class="slide-tab"></div>
+              <div id="prevL" class="prev" ></div>
+              <div id="prevR" class="prev" ></div>
+            </div>
           </div>
-
+          <div class='list'>
           <?php
             global $post;
             $args = array(
@@ -93,7 +105,7 @@ get_header(); ?>
               echo "</a></p>";
             endforeach;
           ?>
-
+          </div>
         </div>
         <div id='advices' class='news-wrap-list'>
           <div class='gallery-news'>
@@ -174,6 +186,7 @@ $(document).ready(function(){
   var currentDocAPI = './data/currentDocFake.json';
   rigestEvent();
   loadCurrentDoc(currentDocAPI);
+  //playGallery();//函数位于slide.js
 });
 
 function rigestEvent(){
