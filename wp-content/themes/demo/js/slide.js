@@ -1,19 +1,19 @@
-function slide(o){
-  if(!o.has('.slider')) return; //首先检测是否包含gallery
-  var slider = o.find('.slider');
-      items = slider.find('.slide-item'),
-      item0 = $(items[0]),
-      buttonPre = o.find('.buttonPre'),
-      buttonNext = o.find('.buttonNext'),
-      sliderWidth = slider.width(), //获取幻灯片外部div宽度
-      sliderHeight = slider.height(), //获取幻灯片外部div高度
-      itemWidth = item0.width(), //获取幻灯片Li的宽度
-      itemNumber = items.length, //获取幻灯片Li的数量
-      // slide_Tab_Contne = '', //初始化tab按钮
-      // slide_Nav_Height = $('.slide-pre').height(), //获取按钮高度
-      // slide_Tab_AWidth = (1 / slide_number) * 100,
-      // slide_TabWidth = $('.slide-tab').width(), //tab的宽度
-      speed = 1000; //滚动速度
+var Slide = {
+  slider : {},
+  items : {},
+  item0 : {},
+  buttonPre : {},
+  buttonNext : {},
+  sliderWidth : 0, //获取幻灯片外部div宽度
+  sliderHeight : 0, //获取幻灯片外部div高度
+  itemWidth : 0, //获取幻灯片Li的宽度
+  itemNumber : 0, //获取幻灯片Li的数量
+  // slide_Tab_Contne : '', //初始化tab按钮
+  // slide_Nav_Height : $('.slide-pre').height(), //获取按钮高度
+  // slide_Tab_AWidth : (1 / slide_number) * 100,
+  // slide_TabWidth : $('.slide-tab').width(), //tab的宽度
+  speed : 1000, //滚动速度
+  interval : {},
 
   // slider.find('ul').append($('.slide-item')[0]);
 
@@ -27,24 +27,38 @@ function slide(o){
   // }
   // $('.slide_Tab').html(slide_Tab_Contne); //写入tab按钮
 
+  init : function(o){
+    var self = this;
+    self.slider = o.find('.slider');
+    self.items = self.slider.find('.slide-item');
+    self.item0 = $(self.items[0]);
+    self.buttonPre = o.find('.buttonPre');
+    self.buttonNext = o.find('.buttonNext');
+    self.sliderWidth = self.slider.width(); //获取幻灯片外部div宽度
+    self.sliderHeight = self.slider.height(); //获取幻灯片外部div高度
+    self.itemWidth = self.item0.width(); //获取幻灯片Li的宽度
+    self.itemNumber = self.items.length; //获取幻灯片Li的数量
+  },
 
-  function slideNext() {
-    slider.animate({marginLeft: -itemWidth}, 500, function checkLast(){
+  slideNext : function() {
+    var self = this;
+    self.slider.animate({marginLeft: -itemWidth}, 500, function checkLast(){
       //判断是否到最后一张
-      if(parseInt(slider.css('margin-left')) == itemWidth * itemNumber){
-        slider.css('margin-left', 0);
+      if(parseInt(self.slider.css('margin-left')) == self.itemWidth * self.itemNumber){
+        self.slider.css('margin-left', 0);
       }
     });
 
-  }
+  },
 
-  function Slide_Last() {
+  slidePre : function() {
+    var self = this;
     //判断是否到第一张
-    if(parseInt(slider.css('margin-left')) == 0){
-      slider.css('margin-left', - itemWidth * itemNumber + 'px');
+    if(parseInt(self.slider.css('margin-left')) == 0){
+      self.slider.css('margin-left', - self.itemWidth * self.itemNumber + 'px');
     }
-    slider.animate({marginLeft: +itemWidth}, 500);
-  }
+    self.slider.animate({marginLeft: +self.itemWidth}, 500);
+  },
 
   // setInterval(function() {
   //     for (var n = 0; n < parseInt(slide_number); n++) {
@@ -72,5 +86,17 @@ function slide(o){
   //   slide_run = setInterval(slideNext, slide_speed)
   // }) //鼠标不在幻灯哦上，开始滚动
 
-  return setInterval(slideNext, speed) //设置滚动器
-}
+  runSlide : function(o){
+    if(o){
+      this.init(o);
+      interval = setInterval(this.slideNext, this.speed);
+    } else{
+      return;
+    }
+  },
+
+  stopSlide : function(){
+    clearInterval(interval);
+  }
+
+};

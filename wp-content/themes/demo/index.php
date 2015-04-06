@@ -198,6 +198,9 @@ $(document).ready(function(){
 
 function rigestEvent(){
   var slideIterval;
+
+  Slide.init($('.news-wrap-list.selected'));
+  Slide.slideNext.call(Slide);
   $('.n-w-h-i').hover(function(){
     //展示新闻
     var name = '#' + $(this).data('name');
@@ -206,7 +209,7 @@ function rigestEvent(){
     $(name).addClass('selected');
     $(name).siblings().removeClass('selected');
     //设置幻灯片播放
-    slideIterval = slide($(name));
+    
   }, function(){
     clearInterval(slideIterval);
   });
