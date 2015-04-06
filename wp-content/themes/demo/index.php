@@ -24,6 +24,8 @@ get_header(); ?>
   </div>
 
   <div class='section clearfix'>
+
+    <!-- 分科室在线医生信息展示 -->
     <div class='left'>
       <div class='online-doc block'>
         <div class='wrap-header'>在线医生</div>
@@ -67,6 +69,8 @@ get_header(); ?>
         </ul>
       </div>
     </div>
+
+    <!-- 网站新闻展示 -->
     <div class='mid'>
       <div class='news-wrap block'>
         <ul class='news-wrap-header clearfix'>
@@ -76,8 +80,8 @@ get_header(); ?>
         </ul>
         <div id='today_news' class='news-wrap-list selected'>
           <div class='gallery-news'>
-            <div class="slide">
-              <ul>
+            <div class='slide'>
+              <ul class='slider'>
                 <li class='img-wrapper slide-item' style=" background:#E81216;" id="slide_item_0"><img src="img/banner03.jpg"></li>
                 <li class='img-wrapper slide-item' style=" background:#000000;" id="slide_item_1"><img src="img/banner02.jpg"></li>
                 <li class='img-wrapper slide-item' style=" background:#4144D7;" id="slide_item_2"><img src="img/banner01.jpg"></li>
@@ -85,8 +89,8 @@ get_header(); ?>
               <a class="slide-pre"></a>
               <a class="slide-next"></a>
               <div class="slide-tab"></div>
-              <div id="prevL" class="prev" ></div>
-              <div id="prevR" class="prev" ></div>
+              <div class="buttonPre" ></div>
+              <div class="buttonNext" ></div>
             </div>
           </div>
           <div class='list'>
@@ -134,7 +138,10 @@ get_header(); ?>
         </div>
       </div>
     </div>
+
+
     <div class='right'>
+      <!-- 登录入口 -->
       <div class='login'>
         <div class='login-patient block'>
           患者登录
@@ -190,12 +197,19 @@ $(document).ready(function(){
 });
 
 function rigestEvent(){
+  var slideIterval;
   $('.n-w-h-i').hover(function(){
+    //展示新闻
+    var name = '#' + $(this).data('name');
     $(this).addClass('selected');
     $(this).siblings().removeClass('selected');
-    $('#'+$(this).data('name')).addClass('selected');
-    $('#'+$(this).data('name')).siblings().removeClass('selected');
-  }, function(){});
+    $(name).addClass('selected');
+    $(name).siblings().removeClass('selected');
+    //设置幻灯片播放
+    slideIterval = slide($(name));
+  }, function(){
+    clearInterval(slideIterval);
+  });
 }
 
 function loadCurrentDoc(API){

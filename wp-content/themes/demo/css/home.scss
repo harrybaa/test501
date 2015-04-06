@@ -238,14 +238,17 @@
       width: 400px;
       height: 300px;
       margin: 0 auto;
-      overflow: hidden;
       .slide{
         position: relative;
-        width: 100%;
-        height: 100%;
-        margin: 0 auto;
-        ul li{
-          position: absolute;
+        width: 400px;
+        height: 300px;
+        overflow: hidden;
+        .slider{
+          width: 9999px;
+          .slide-item{
+            float: left;
+            width: 400px;
+          }
         }
         .slide-pre,
         .slide-next{
