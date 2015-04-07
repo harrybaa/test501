@@ -42,7 +42,7 @@ var Slide = {
 
   slideNext : function() {
     var self = this;
-    self.slider.animate({marginLeft: -itemWidth}, 500, function checkLast(){
+    self.slider.animate({marginLeft: -self.itemWidth}, 500, function checkLast(){
       //判断是否到最后一张
       if(parseInt(self.slider.css('margin-left')) == self.itemWidth * self.itemNumber){
         self.slider.css('margin-left', 0);

@@ -15,7 +15,7 @@ get_header(); ?>
 <div id='primary' class='content'>
 
   <div class='search-wrapper clearfix'>
-    <div class='logo left'></div>
+    <div class='logo left'>LOGO</div>
     <div class='search-block left'>
       <input name='search_input' class='input-block' type='textarea' autocomplete='off'/>
       <input name='search_submit' class='input-submit' value='搜索' type='submit'/>
@@ -152,11 +152,17 @@ get_header(); ?>
       </div>
 
       <div class='current-query block'>
-        <div class='wrap-header'>在线咨询</div>
+        <div class='wrap-header'>当前咨询</div>
+        <div id='current-q-l' class='query-list'>
+          <ul></ul>
+        </div>
       </div>
 
       <div class='hot-query block'>
         <div class='wrap-header'>热门咨询</div>
+        <div id='hot-q-l' class='query-list'>
+          <ul></ul>
+        </div>
       </div>
       <div>
 
@@ -165,11 +171,16 @@ get_header(); ?>
   </div>
 
   <div class='section block appointment'>
+    <div class='appointment-header'>网上预约咨询</div>
+    <div class='appointment-slider'>
 
+    </div>
   </div>
 
 </div><!-- .content-area -->
 
+<!-- **************************** -->
+<!-- 模版代码：用于动态渲染的模版 -->
 <script id='temp_currentDocInfo' type="text/html">
   <div class='doc-info-wrapper left'>
     <div class='online-status left'></div>
@@ -182,18 +193,60 @@ get_header(); ?>
     </div>
   </div>
 </script>
+
 <script id='temp_currentDocInfo_more' type="text/html">
   <div class='more left'>
     更<br>多<br>>>
   </div>
 </script>
 
+<script id='temp_queryListItem' type="text/html">
+  <li class='q-l-i'><a href="{{url}}">{{title}}</a><span class='date'>{{date}}</span></li>
+</script>
+
+<script id='temp_appointDocInfo' type="text/html">
+  <li class='doc-wrapper {{status}} left'>
+    <div class='online-status left'></div>
+    <div class='head-pic img-wrapper left'></div>
+    <div class='right-info left'>
+      <p class='subject'>{{subject}}</p>
+      <p class='department'>{{department}}</p>
+      <p>
+        <span class='name'>{{name}}</span>
+        <span class='status'>
+          {{ if status == 'online'}}
+            在线
+          {{ else }}
+            离线
+          {{ /if }}
+        </span>
+      </p>
+    </div>
+    <div class='ap-button'>
+      {{ if status == 'online'}}
+        在线聊天
+      {{ else }}
+        预约咨询
+      {{ /if }}
+    </div>
+  </li>
+</script>
+
+<!-- ****** -->
+<!-- 主函数 -->
 <script type="text/javascript">
+
 $(document).ready(function(){
-  var currentDocAPI = './data/currentDocFake.json';
+  var currentDocAPI = './data/currentDocFake.json',
+      currentQueAPI = './data/currentQueryDataFack.json',
+      hotQueAPI = './data/hotQueryDataFack.json',
+      appointmentAPI = './data/appointmentFake.json';
+
   rigestEvent();
   loadCurrentDoc(currentDocAPI);
-  //playGallery();//函数位于slide.js
+  loadCurrentQue(currentQueAPI);
+  loadHotQue(hotQueAPI);
+  loadAppointment(appointmentAPI);
 });
 
 function rigestEvent(){
@@ -228,6 +281,46 @@ function loadCurrentDoc(API){
     }
   });
 }
+function loadCurrentQue(API){
+  $.ajax({
+    url: API,
+    dataType: 'json',
+    success: function(res){
+      console.log('Current Query data loaded.');
+      renderCurrentQue(res);
+    },
+    error: function(){
+      console.log('Faild to load Current Online Doc data.');
+    }
+  });
+}
+function loadHotQue(API){
+  $.ajax({
+    url: API,
+    dataType: 'json',
+    success: function(res){
+      console.log('Current Query data loaded.');
+      renderHotQue(res);
+    },
+    error: function(){
+      console.log('Faild to load Current Online Doc data.');
+    }
+  });
+}
+function loadAppointment(API){
+  $.ajax({
+    url: API,
+    dataType: 'json',
+    success: function(res){
+      console.log('Appointment data loaded.');
+      renderAppointment(res);
+    },
+    error: function(){
+      console.log('Faild to load Current Online Doc data.');
+    }
+  });
+}
+
 function renderCurrentDoc(data){
   var cateData = {
         '男科': [],
@@ -261,6 +354,47 @@ function renderCurrentDoc(data){
       }
     });
   }
+}
+function renderCurrentQue(data){
+  var html = '';
+  data.map(function(i){
+    html += template('temp_queryListItem', i);
+  })
+  $('#current-q-l').children('ul').html(html);
+}
+function renderHotQue(data){
+  var html = '';
+  data.map(function(i){
+    html += template('temp_queryListItem', i);
+  })
+  $('#hot-q-l').children('ul').html(html);
+}
+function renderAppointment(data){
+  var html = '',
+      htmlSegment = '',
+      tempArray = [],
+      result = [];
+
+  //一页只显示四个，要分组
+  for(var i = 0, l = data.length; i < l; i++){
+    tempArray.push(data[i]);
+    //遇四保存一个小数组，使其得到一个二维数组
+    if(i % 4 === 3){
+      result.push(tempArray);
+      tempArray = [];
+    }
+  }
+
+  result.map(function(r_i){
+    html += "<div class='appointment-wrapper clearfix'> <ul>";
+    htmlSegment = '';
+    r_i.map(function(r_i_i){
+      htmlSegment += template('temp_appointDocInfo', r_i_i);
+    });
+    html += htmlSegment;
+    html += "</ul> </div>";
+  });
+  $('.appointment-slider').html(html);
 }
 </script>
 
