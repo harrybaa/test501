@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<include file="struts_board.xml" />
+	<include file="struts_bbs.xml" />
+	<include file="struts_bbsAnswer.xml" />
+	
+	<constant name="struts.custom.i18n.resources" value="message" />
+	<package name="struts2" extends="struts-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.bbs.interceptor.LoginInterceptor"></interceptor>
+		</interceptors>
+		<global-results>
+			<result name="login">/pages/login.jsp</result>
+		</global-results>
+
+		<action name="register" class="registerAction">
+			<result>login.jsp</result>
+			<result name="input">register.jsp</result>
+		</action>
+		
+		<action name="addUser" class="registerAction">
+			<result type="redirect">showAllUser</result>
+			<result name="input">addUser.jsp</result>
+		</action>
+		
+		<action name="login" class="loginAction">
+			<result >loginresult.jsp</result>
+			<result name="input">/pages/login.jsp</result>
+			<result name="error">/pages/loginfailure.jsp</result>
+		</action>
+		
+		<action name="able" class="ableAction">
+			<result name="success">/admin/index.jsp</result>
+			<result name="error">/admin/failure.jsp</result>
+		</action>
+		
+		<action name="showAllUser" class="showUserAction">
+			<result >/admin/userManager.jsp</result>
+		</action>
+		
+		<action name="deleteUser" class="deleteUserAction">
+			<result type="redirect">showAllUser</result>
+		</action>
+		
+		<action name="addAuthority" class="addAuthorityAction">
+			<result type="redirect">showAllUser</result>
+		</action>
+		
+		<action name="deleteAuthority" class="deleteAuthorityAction">
+			<result type="redirect">showAllUser</result>
+		</action>
+		
+		<action name="editPUser" class="editPUserAction">
+			<result >/admin/editUser.jsp</result>
+		</action>
+		
+		<action name="editUser" class="editUserAction">
+			<result type="redirect">showAllUser</result>
+		</action>
+ 	
+		<action name="downLoad" class="com.bbs.action.load.DownLoadAction">
+			<result name="success" type="stream">
+				<param name="contentDisposition">filename="bbs.rar"</param>
+				<param name="inputName">downLoad</param>
+			</result>
+			<result name="login">downloaderror.jsp</result>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+		</action>
+		<action name="upload" class="com.bbs.action.load.UploadAction">
+			<result>/load/uploadresult.jsp</result>
+			<result name="input">/load/upload.jsp</result>
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">409600</param>
+				<param name="allowedTypes">application/vnd.ms-powerpoint</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack" />
+		</action>
+	</package>
+</struts>

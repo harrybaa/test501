@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+<!-- 数据库德配置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/myproject</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value></value>
+		</property>
+	</bean>
+
+	<!-- 读取ibatis配置文件 -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="configLocation">
+			<value>classpath:SqlMapConfig.xml</value>
+		</property>
+	</bean>
+
+	<bean id="bbsDao" class="com.bbs.dao.impl.BbsDaoImpl" >
+		<property name="client">
+			<ref local="sqlMapClient"/>
+		</property>
+		<property name="board" ref="board"/>
+		<property name="bbs" ref="bbs"/>
+	</bean>
+	<bean id="bbsService" class="com.bbs.service.impl.BbsServiceImpl">
+		<property name="bbsDao" ref="bbsDao"/>
+	</bean>
+	<bean id="bbs" class="com.bbs.model.Bbs" />
+	<bean id="addBbsAction" class="com.bbs.action.bbs.AddBbsAction">
+		<property name="bbsService" ref="bbsService" />
+		<property name="bbs" ref="bbs" />
+	</bean>
+	<bean id="showAllAction" class="com.bbs.action.bbs.ShowAllAction">
+		<property name="bbsDao" ref="bbsDao" />
+	</bean>
+	<bean id="selectByIdAction" class="com.bbs.action.bbs.SelectByIdAction">
+		<property name="bbsService" ref="bbsService" />
+		<property name="bbs" ref="bbs" />
+	</bean>
+	<bean id="deleteByIdAction" class="com.bbs.action.bbs.DeleteAction">
+		<property name="bbsService" ref="bbsService" />
+		<property name="bbs" ref="bbs" />
+	</bean>
+	<bean id="classifyAction" class="com.bbs.action.bbs.ClassifyAction">
+		<property name="bbsService" ref="bbsService" />
+		<property name="bbs" ref="bbs" />
+	</bean>
+	<bean id="showByAuAction" class="com.bbs.action.bbs.ShowByAuAction">
+		<property name="bbsService" ref="bbsService" />
+		<property name="board" ref="board"/>
+	</bean>
+</beans>

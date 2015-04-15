@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+    <!DOCTYPE sqlMap        
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"        
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="User">
+    <typeAlias alias="user" type="com.bbs.model.User" />
+	<select id="checkUser" parameterClass="user" resultClass="user">  
+     <![CDATA[  
+       select name,password,able from weiwei where name=#name# and password=#password#  
+        ]]><!-- 登录时的查询 -->
+	</select>
+	
+	<typeAlias alias="usa" type="com.bbs.model.User" />
+	<insert id="useradd" parameterClass="usa">  
+     <![CDATA[  
+       insert into weiwei(name,password,sex,age,qq,email,province,city,` from`,face,able) values(#name#,#password#,#sex#,#age#,#qq#,#email#,#province#,#city#,#from#,#face#,#able#)  
+        ]]><!-- 注册时的插入 -->
+	</insert>
+	
+	<typeAlias alias="usb" type="com.bbs.model.User" />
+	<select id="usersearch" parameterClass="usb" resultClass="usb">  
+     <![CDATA[  
+       select * from weiwei
+        ]]>
+	</select>
+	
+	<typeAlias alias="usc" type="com.bbs.model.User" />
+	<select id="userdelete" parameterClass="usc" resultClass="usc">  
+     <![CDATA[  
+       delete from weiwei where id=#id#
+        ]]>
+	</select>
+	
+	<typeAlias alias="usd" type="com.bbs.model.User" />
+	<select id="usershowbyid" parameterClass="usd" resultClass="usd">  
+     <![CDATA[  
+       select * from weiwei where id=#id#
+        ]]>
+	</select>
+	
+	<typeAlias alias="use" type="com.bbs.model.User" />
+	<select id="modify" parameterClass="use" resultClass="use">  
+     <![CDATA[  
+       //待定
+        ]]>
+	</select>
+	
+	<typeAlias alias="usadda" type="com.bbs.model.User" />
+	<select id="addauthority" parameterClass="usadda" resultClass="usadda">  
+     <![CDATA[  
+       update weiwei set able=1 where id=#id#
+        ]]>
+	</select>
+	
+	<typeAlias alias="usdeletea" type="com.bbs.model.User" />
+	<select id="deleteauthority" parameterClass="usdeletea" resultClass="usdeletea">  
+     <![CDATA[  
+       update weiwei set able=0 where id=#id#
+        ]]>
+	</select>
+	
+</sqlMap>

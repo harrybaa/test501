@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="struts_board" extends="struts-default">
+
+		<action name="addBoard" class="addBoardAction">
+			<result type="redirect">showBoard</result>
+		</action>
+		
+		<action name="showBoard" class="showBoardAction">
+			<result>/admin/boardManager.jsp</result>
+		</action>
+		
+		<action name="delete" class="deleteAction" >
+			<result type="redirect">showBoard</result>
+		</action>
+		
+	</package>
+</struts>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <include file="struts_bbsAnswer.xml"/>
+	<package name="struts_bbs" extends="struts-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.bbs.interceptor.LoginInterceptor"></interceptor>
+		</interceptors>
+		<action name="publishAuth">
+			<result type="redirect">/pages/publish.jsp</result>
+			<result name="login">/pages/login.jsp</result>
+			<interceptor-ref name="loginInterceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+		<action name="addBbs" class="addBbsAction">
+			<result>/pages/index.jsp</result>
+		</action>
+		
+		<action name="showAll" class="showAllAction">
+			<result>/pages/all.jsp</result>
+		</action>
+		
+		<action name="manager" class="showAllAction">
+			
+		</action>
+		 
+		<action name="selectById" class="com.bbs.action.bbs.SelectByIdAction">
+		    <result name="success" type="chain" >
+                <param name="actionName">allBbsAnswer</param>
+                <param name="package">struts_bbsAnswer</param>
+                <param name="namespace">/bbsAnswer</param>
+        </result>
+		</action>
+		
+		<action name="deleteById" class="deleteByIdAction" >
+		<result >/admin/deleteBoard.jsp</result>
+		</action>
+		
+		<action name="classify" class="classifyAction" >
+			<result >/pages/all.jsp</result>
+		</action>
+		
+		<action name="showbyau" class="showByAuAction" >
+			<result >/admin/deleteBoard.jsp</result>
+		</action>
+		
+	</package>
+</struts>
