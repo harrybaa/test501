@@ -250,10 +250,11 @@ $(document).ready(function(){
 });
 
 function rigestEvent(){
-  var slideIterval;
+  var slide = new Slide();
 
-  Slide.init($('.news-wrap-list.selected'));
-  Slide.slideNext.call(Slide);
+  // Slide.init($('.news-wrap-list.selected'));
+  // Slide.runSlide.call(Slide, $('.news-wrap-list.selected'));
+  slide.runSlide($('.news-wrap-list.selected'));
   $('.n-w-h-i').hover(function(){
     //展示新闻
     var name = '#' + $(this).data('name');
