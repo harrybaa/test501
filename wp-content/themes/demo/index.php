@@ -420,6 +420,7 @@ require([
     var Home = new Home();
 
   })();
+  
 </script>
 
 <?php get_footer(); ?>
