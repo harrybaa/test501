@@ -16,7 +16,6 @@
   <meta charset='<?php bloginfo( "charset" ); ?>'>
   <meta name='viewport' content='width=device-width'>
   <script>(function(){document.documentElement.className='js'})();</script>
-  <script type="text/javascript" src='<?php bloginfo('template_url'); ?>/js/jquery-1.11.2.min.js'></script>
   
   <!-- css reset for every page -->
   <link rel="stylesheet" type="text/css" href="<?php bloginfo('template_url') ?>/style.css">

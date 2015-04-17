@@ -9,9 +9,6 @@
 
 get_header(); ?>
 
-<script type="text/javascript" src='<?php bloginfo('template_url'); ?>/js/template.js'></script>
-<script type="text/javascript" src='<?php bloginfo('template_url'); ?>/js/slide.js'></script>
-
 <div id='primary' class='content'>
 
   <div class='search-wrapper clearfix'>
@@ -74,11 +71,11 @@ get_header(); ?>
     <div class='mid'>
       <div class='news-wrap block'>
         <ul class='news-wrap-header clearfix'>
-          <li class='n-w-h-i selected' data-name='today_news'>当日头条</li>
+          <li class='n-w-h-i selected' data-name='today-news'>当日头条</li>
           <li class='n-w-h-i' data-name='advices'>就医指南</li>
           <li class='n-w-h-i' data-name='health_tips'>健康速递</li>
         </ul>
-        <div id='today_news' class='news-wrap-list selected'>
+        <div id='today-news' class='news-wrap-list selected'>
           <div class='gallery-news'>
             <div class='slide'>
               <ul class='slider'>
@@ -115,12 +112,12 @@ get_header(); ?>
           <div class='gallery-news'>
             This is a gallery news.
           </div>
-
+          <div class='list'>
           <?php
             global $post;
             $args = array(
               'numberposts' => 10,
-              'category' => 1,
+              'category' => 3,
             );
             $custom_posts = get_posts($args);
             foreach($custom_posts as $post) : setup_postdata($post);
@@ -131,7 +128,7 @@ get_header(); ?>
               echo "</a></p>";
             endforeach;
           ?>
-
+          </div>
         </div>
         <div id='health_tips' class='news-wrap-list'>
           This block for health campanion information.
@@ -234,169 +231,195 @@ get_header(); ?>
 
 <!-- ****** -->
 <!-- 主函数 -->
+<!-- ****** -->
+<script type="text/javascript" src='<?php bloginfo('template_url'); ?>/js/require.js'></script>
+<!-- 每个模块的路径在setting.js里设置 -->
+<script type="text/javascript" src='<?php bloginfo('template_url'); ?>/js/setting.js'></script>
 <script type="text/javascript">
+require([
+  'jquery',
+  'template'
+  ], function($, Template){
 
-$(document).ready(function(){
-  var currentDocAPI = './data/currentDocFake.json',
-      currentQueAPI = './data/currentQueryDataFack.json',
-      hotQueAPI = './data/hotQueryDataFack.json',
-      appointmentAPI = './data/appointmentFake.json';
-
-  rigestEvent();
-  loadCurrentDoc(currentDocAPI);
-  loadCurrentQue(currentQueAPI);
-  loadHotQue(hotQueAPI);
-  loadAppointment(appointmentAPI);
-});
-
-function rigestEvent(){
-  var slide = new Slide();
-
-  // Slide.init($('.news-wrap-list.selected'));
-  // Slide.runSlide.call(Slide, $('.news-wrap-list.selected'));
-  slide.runSlide($('.news-wrap-list.selected'));
-  $('.n-w-h-i').hover(function(){
-    //展示新闻
-    var name = '#' + $(this).data('name');
-    $(this).addClass('selected');
-    $(this).siblings().removeClass('selected');
-    $(name).addClass('selected');
-    $(name).siblings().removeClass('selected');
-    //设置幻灯片播放
-    
-  }, function(){
-    clearInterval(slideIterval);
-  });
-}
-
-function loadCurrentDoc(API){
-  $.ajax({
-    url: API,
-    dataType: 'json',
-    success: function(res){
-      console.log('Current Online Doc data loaded.');
-      renderCurrentDoc(res);
-    },
-    error: function(){
-      console.log('Faild to load Current Online Doc data.');
+    var Home = function() {
+      this.init();
     }
-  });
-}
-function loadCurrentQue(API){
-  $.ajax({
-    url: API,
-    dataType: 'json',
-    success: function(res){
-      console.log('Current Query data loaded.');
-      renderCurrentQue(res);
-    },
-    error: function(){
-      console.log('Faild to load Current Online Doc data.');
-    }
-  });
-}
-function loadHotQue(API){
-  $.ajax({
-    url: API,
-    dataType: 'json',
-    success: function(res){
-      console.log('Current Query data loaded.');
-      renderHotQue(res);
-    },
-    error: function(){
-      console.log('Faild to load Current Online Doc data.');
-    }
-  });
-}
-function loadAppointment(API){
-  $.ajax({
-    url: API,
-    dataType: 'json',
-    success: function(res){
-      console.log('Appointment data loaded.');
-      renderAppointment(res);
-    },
-    error: function(){
-      console.log('Faild to load Current Online Doc data.');
-    }
-  });
-}
 
-function renderCurrentDoc(data){
-  var cateData = {
-        '男科': [],
-        '妇科': [],
-        '儿科': [],
-        '胃病科': [],
-        '肾脏科': []
-      }, 
-      l = data.length, cate, html = '';
+    Home.prototype = {
+      APIs: {
+        currentDocAPI: './data/currentDocFake.json',
+        currentQueAPI: './data/currentQueryDataFack.json',
+        hotQueAPI: './data/hotQueryDataFack.json',
+        appointmentAPI: './data/appointmentFake.json'
+      },
 
-  for(var i = 0;i < l;i++){
-    cate = data[i]['subject'];
-    //每个block最多显示两个现在医生信息
-    if(cateData[cate].length < 2){
-      cateData[cate].push(data[i]);
-    }
-  }
+      init: function(){
+        this.rigestEvent();
+        this.loadCurrentDoc(this.APIs.currentDocAPI);
+        this.loadCurrentQue(this.APIs.currentQueAPI);
+        this.loadHotQue(this.APIs.hotQueAPI);
+        this.loadAppointment(this.APIs.appointmentAPI);
+      },
 
-  for(subject in cateData){
-    html = '';
-    if(cateData[subject]){
-      cateData[subject].forEach(function(data){
-        html += template('temp_currentDocInfo', data);
-      });
-    }
-    $('.cate-i').each(function(){
-      if($(this).data('subject') === subject){
-        $(this).find('.doc-wrapper').append(html).append(
-          template('temp_currentDocInfo_more')
-        );
+      rigestEvent: function(){
+        $('.n-w-h-i').hover(function(){
+          //展示新闻
+          var name = '#' + $(this).data('name');
+          $(this).addClass('selected');
+          $(this).siblings().removeClass('selected');
+          $(name).addClass('selected');
+          $(name).siblings().removeClass('selected');
+          //设置幻灯片播放
+        }, function(){
+
+        });
+      },
+
+      loadCurrentDoc: function(API){
+        var self = this;
+        $.ajax({
+          url: API,
+          dataType: 'json',
+          success: function(res){
+            console.log('Current Online Doc data loaded.');
+            self.renderCurrentDoc(res);
+          },
+          error: function(){
+            console.log('Faild to load Current Online Doc data.');
+          }
+        });
+      },
+
+      loadCurrentQue: function(API){
+        var self = this;
+        $.ajax({
+          url: API,
+          dataType: 'json',
+          success: function(res){
+            console.log('Current Query data loaded.');
+            self.renderCurrentQue(res);
+          },
+          error: function(){
+            console.log('Faild to load Current Online Doc data.');
+          }
+        });
+      },
+
+      loadHotQue: function(API){
+        var self = this;
+        $.ajax({
+          url: API,
+          dataType: 'json',
+          success: function(res){
+            console.log('Current Query data loaded.');
+            self.renderHotQue(res);
+          },
+          error: function(){
+            console.log('Faild to load Current Online Doc data.');
+          }
+        });
+      },
+
+      loadAppointment: function(API){
+        var self = this;
+        $.ajax({
+          url: API,
+          dataType: 'json',
+          success: function(res){
+            console.log('Appointment data loaded.');
+            self.renderAppointment(res);
+          },
+          error: function(){
+            console.log('Faild to load Current Online Doc data.');
+          }
+        });
+      },
+
+      renderCurrentDoc: function(data){
+        var cateData = {
+              '男科': [],
+              '妇科': [],
+              '儿科': [],
+              '胃病科': [],
+              '肾脏科': []
+            }, 
+            l = data.length, cate, html = '';
+
+        for(var i = 0;i < l;i++){
+          cate = data[i]['subject'];
+          //每个block最多显示两个现在医生信息
+          if(cateData[cate].length < 2){
+            cateData[cate].push(data[i]);
+          }
+        }
+
+        for(subject in cateData){
+          html = '';
+          if(cateData[subject]){
+            cateData[subject].forEach(function(data){
+              html += Template('temp_currentDocInfo', data);
+            });
+          }
+          $('.cate-i').each(function(){
+            if($(this).data('subject') === subject){
+              $(this).find('.doc-wrapper').append(html).append(
+                Template('temp_currentDocInfo_more')
+              );
+            }
+          });
+        }
+      },
+
+      renderCurrentQue: function(data){
+        var html = '';
+        data.map(function(i){
+          html += Template('temp_queryListItem', i);
+        })
+        $('#current-q-l').children('ul').html(html);
+      },
+
+      renderHotQue: function(data){
+        var html = '';
+        data.map(function(i){
+          html += Template('temp_queryListItem', i);
+        })
+        $('#hot-q-l').children('ul').html(html);
+      },
+
+      renderAppointment: function(data){
+        var html = '',
+            htmlSegment = '',
+            tempArray = [],
+            result = [];
+
+        //一页只显示四个，要分组
+        for(var i = 0, l = data.length; i < l; i++){
+          tempArray.push(data[i]);
+          //遇四保存一个小数组，使其得到一个二维数组
+          if(i % 4 === 3){
+            result.push(tempArray);
+            tempArray = [];
+          }
+        }
+
+        result.map(function(r_i){
+          html += "<div class='appointment-wrapper clearfix'> <ul>";
+          htmlSegment = '';
+          r_i.map(function(r_i_i){
+            htmlSegment += Template('temp_appointDocInfo', r_i_i);
+          });
+          html += htmlSegment;
+          html += "</ul> </div>";
+        });
+        $('.appointment-slider').html(html);
       }
-    });
-  }
-}
-function renderCurrentQue(data){
-  var html = '';
-  data.map(function(i){
-    html += template('temp_queryListItem', i);
-  })
-  $('#current-q-l').children('ul').html(html);
-}
-function renderHotQue(data){
-  var html = '';
-  data.map(function(i){
-    html += template('temp_queryListItem', i);
-  })
-  $('#hot-q-l').children('ul').html(html);
-}
-function renderAppointment(data){
-  var html = '',
-      htmlSegment = '',
-      tempArray = [],
-      result = [];
 
-  //一页只显示四个，要分组
-  for(var i = 0, l = data.length; i < l; i++){
-    tempArray.push(data[i]);
-    //遇四保存一个小数组，使其得到一个二维数组
-    if(i % 4 === 3){
-      result.push(tempArray);
-      tempArray = [];
-    }
-  }
+    };
+    // end of prototype
 
-  result.map(function(r_i){
-    html += "<div class='appointment-wrapper clearfix'> <ul>";
-    htmlSegment = '';
-    r_i.map(function(r_i_i){
-      htmlSegment += template('temp_appointDocInfo', r_i_i);
-    });
-    html += htmlSegment;
-    html += "</ul> </div>";
-  });
-  $('.appointment-slider').html(html);
-}
+    var Home = new Home();
+
+  })();
 </script>
 
 <?php get_footer(); ?>
